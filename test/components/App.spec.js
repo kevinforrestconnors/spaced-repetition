@@ -1,22 +1,35 @@
-import proxyquire from 'proxyquire'
-import sinon from 'sinon';
-import {expect} from 'chai';
-import {chance} from './helpers';
-import { App } from '../src/components/App';
+import { App } from '../../src/components/App';
+import React from 'react';
+import expect from 'expect';
+import renderer from 'react-test-renderer';
 
 describe('App components', () => {
-  it('App returns a component', () => {
+  it('renders props', () => {
     // given
-    const userName = chance.guid();
-    const lang = chance.guid();
-
+    const userName = 'kevinforrestconnors';
+    const userName2 = 'anaanramay';
+    const lang = 'typescript';
+    const lang2 = 'javascript';
+    
     // when
-    const app = App({
-      userName,
-      lang
-    });
+    const tree = renderer.create(
+      <App
+        userName={userName}
+        lang={lang}
+      />
+    )
+    .toJSON();
 
-    // expect
-   
+    const tree2 = renderer.create(
+      <App
+        userName={userName2}
+        lang={lang2}
+      />
+    )
+    .toJSON();
+    
+    // then
+    expect(tree).toMatchSnapshot();
+    expect(tree2).toMatchSnapshot();
   });
 });

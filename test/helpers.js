@@ -36,12 +36,13 @@ function createWindow() {
   }
 }
 
-beforeEach(createWindow);
+beforeEach(() => {
+  createWindow();
+});
 createWindow();
 
 export function getJSDOM() {
   return jsdom;
 }
-
 
 export const chance = new Chance();
