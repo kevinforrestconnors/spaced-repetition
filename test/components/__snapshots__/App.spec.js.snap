@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App components renders props 1`] = `
+<h1>
+  kevinforrestconnors
+   
+  typescript
+</h1>
+`;
+
+exports[`App components renders props 2`] = `
+<h1>
+  anaanramay
+   
+  javascript
+</h1>
+`;
