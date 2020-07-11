@@ -1,5 +1,6 @@
 import Chance from 'chance';
 import {JSDOM} from 'jsdom';
+import {deckStore} from '../src/stores/deck-store';
 
 let jsdom = null;
 
@@ -33,11 +34,16 @@ function createWindow() {
   window.onerror = function (_, __, ___, ____, error) {
     console.error(error.stack);
     process.exit(1);
-  }
+  };
+}
+
+function resetStores() {
+  deckStore.actions.reset();
 }
 
 beforeEach(() => {
   createWindow();
+  resetStores();
 });
 createWindow();
 

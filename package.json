@@ -48,6 +48,8 @@
     "expect": "^26.1.0",
     "jest": "^26.1.0",
     "jsdom": "^16.2.2",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
     "nodemon": "^2.0.4",
     "react-test-renderer": "^16.13.1",
     "sinon": "^9.0.2",
