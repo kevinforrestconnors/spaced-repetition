@@ -2,16 +2,20 @@
 
 exports[`App components renders props 1`] = `
 <h1>
+  Hi 
   kevinforrestconnors
-   
+   from React! Welcome to 
   typescript
+  !
 </h1>
 `;
 
 exports[`App components renders props 2`] = `
 <h1>
+  Hi 
   anaanramay
-   
+   from React! Welcome to 
   javascript
+  !
 </h1>
 `;

@@ -6,5 +6,9 @@ type HelloWorldProps = {
 }
 
 export function App(props: HelloWorldProps): React.ReactElement<HelloWorldProps> {
-  return <h1>{props.userName} {props.lang}</h1>;
+  return (
+    <h1>
+      Hi {props.userName} from React! Welcome to {props.lang}!
+    </h1>
+  );
 }

@@ -16,5 +16,11 @@
   "rules": {
     "indent": ["error", 2],
     "semi": ["error", "always"]
-  }
+  },
+  "globals": {
+    "File": "readonly",
+    "FileReader": "readonly",
+    "window": "readonly",
+    "localStorage": "readonly"
+  } 
 }

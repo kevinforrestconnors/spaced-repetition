@@ -11,6 +11,9 @@
     "verify": "npm run fixlint && npm test -- -u",
     "build": "webpack"
   },
+  "jest": {
+    "setupFiles": ["./test/browser-mocks.js"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kevinforrestconnors/spaced-repetition.git"
