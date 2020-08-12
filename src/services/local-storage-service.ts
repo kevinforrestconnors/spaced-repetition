@@ -36,7 +36,7 @@ export function getDecks(): Record<string, string> {
   return data.decks;
 }
 
-(function initialize() {
+(function initialize(): void {
   if (localStorage.getItem('spaced-repetition') === null) {
     localStorage.setItem('spaced-repetition', JSON.stringify({
       decks: {}

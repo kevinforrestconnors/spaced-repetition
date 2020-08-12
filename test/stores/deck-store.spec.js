@@ -97,27 +97,33 @@ describe('Deck store', () => {
     });
   });
 
-  it('initializes with decks from localStorage', () => {
+  it('initializes with decks from localStorage', async () => {
     // given
-    
-    const filesInLocalStorage = chance.n(() => {
-      const fileName = chance.guid();
-      const fileContents = chance.guid();
-      return new File([fileContents], fileName, { type: 'application/json' });
-    }, chance.d20());
-    
-    const filesNotInLocalStorage = chance.n(() => {
-      const fileName = chance.guid();
-      const fileContents = chance.guid();
-      return new File([fileContents], fileName, { type: 'application/json' });
-    }, chance.d20());
+    const fileNames = chance.n(chance.guid, chance.d20());
+    const fileContents = chance.n(chance.guid, fileNames.length);
 
-    filesInLocalStorage.forEach(localStorageService.setFileContents);
+    const decks = [];
+
+    for (let i = 0; i < fileNames.length; i++) {
+      decks.push(new File([fileContents[i]], fileNames[i], { type: 'application/json' }));
+    }
+      
+    await Promise.all(decks.map((deck) => (async () => {
+      await localStorageService.setFileContents(deck);
+    })()));
 
     // when
-    
+    deckStore.actions.initialize();
     
     // then
+    fileNames.forEach((fileName) => {
+      expect(deckStore.select.deck(fileName)).toEqual(
+        {
+          title: fileName,
+          body: fileContents[fileNames.findIndex((e) => e === fileName)]
+        }
+      );
+    });
   });
 
   it('observes changes from localStorage', () => {

@@ -21,17 +21,23 @@ export const deckStore = {
     addDeck: action((deck: Deck): void => {
       deckStore.values.decks.set(deck.title, deck);
     }),
-    deleteDeck: action((key: string): void => {
-      deckStore.values.decks.delete(key);
+    deleteDeck: action((deckName: string): void => {
+      deckStore.values.decks.delete(deckName);
+    }),
+    initialize: action((): void => {
+      deckStore.actions.reset();
+      const decks = localStorageService.getDecks();
+      for (const [name, contents] of Object.entries(decks)) {
+        deckStore.actions.addDeck({
+          title: name,
+          body: contents
+        });
+      }
     })
-    // ,
-    // initialize: (): void => {
-    //   localStorageService.
-    // }
   },
 
   select: {
     decks: (): Deck[] => Array.from(deckStore.values.decks.values()),
-    deck: (key: string): Deck => deckStore.values.decks.get(key)
+    deck: (deckName: string): Deck => deckStore.values.decks.get(deckName)
   }
 };
