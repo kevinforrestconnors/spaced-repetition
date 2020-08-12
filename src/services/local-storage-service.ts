@@ -11,7 +11,7 @@ async function readFileAsText(file: File): Promise<string> {
   });
 }
 
-function getLocalStorageAsJSON(): Record<string, unknown> {
+function getLocalStorageAsJSON(): {decks: Record<string, string>} {
   return JSON.parse(localStorage.getItem('spaced-repetition'));
 }
 
@@ -29,6 +29,11 @@ export function getFileContents(fileName: string): JSONString {
 export function getFile(fileName: string): File {
   const fileContents = getFileContents(fileName);
   return new File([fileContents], fileName, { type: 'application/json'} );
+}
+
+export function getDecks(): Record<string, string> {
+  const data = getLocalStorageAsJSON();
+  return data.decks;
 }
 
 (function initialize() {

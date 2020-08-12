@@ -1,4 +1,5 @@
 import { observable, action} from "mobx";
+import * as localStorageService from '../services/local-storage-service';
 
 export type Deck = {
   title: string;
@@ -23,6 +24,10 @@ export const deckStore = {
     deleteDeck: action((key: string): void => {
       deckStore.values.decks.delete(key);
     })
+    // ,
+    // initialize: (): void => {
+    //   localStorageService.
+    // }
   },
 
   select: {

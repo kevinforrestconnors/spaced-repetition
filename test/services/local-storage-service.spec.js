@@ -100,7 +100,31 @@ describe('Local storage service', () => {
 
     });
 
-    it('getFileContent cannot find the file', async () => {
+    it('getFileContents cannot find the file', async () => {
+
+    });
+
+    it('getDecks returns all the decks', async () => {
+      // given
+      const fileNames = chance.n(chance.guid, chance.d20());
+      const fileContents = chance.n(chance.guid, fileNames.length);
+
+      const decks = [];
+      const expectedLocalStorageDecks = {};
+
+      for (let i = 0; i < fileNames.length; i++) {
+        expectedLocalStorageDecks[fileNames[i]] = fileContents[i];
+        decks.push(new File([fileContents[i]], fileNames[i], { type: 'application/json' }));
+      }
+      
+      await Promise.all(decks.map((deck) => (async () => {
+        await localStorageService.setFileContents(deck);
+      })()));
+
+      // when
+      // then
+
+      expect(expectedLocalStorageDecks).toEqual(localStorageService.getDecks());
 
     });
   });

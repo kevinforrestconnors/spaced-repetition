@@ -97,28 +97,28 @@ describe('Deck store', () => {
     });
   });
 
-  // it('initializes with decks from localStorage', () => {
-  //   // given
+  it('initializes with decks from localStorage', () => {
+    // given
     
-  //   const filesInLocalStorage = chance.n(() => {
-  //     const fileName = chance.guid();
-  //     const fileContents = chance.guid();
-  //     return new File([fileContents], fileName, { type: 'application/json' });
-  //   }, chance.d20());
+    const filesInLocalStorage = chance.n(() => {
+      const fileName = chance.guid();
+      const fileContents = chance.guid();
+      return new File([fileContents], fileName, { type: 'application/json' });
+    }, chance.d20());
     
-  //   const filesNotInLocalStorage = chance.n(() => {
-  //     const fileName = chance.guid();
-  //     const fileContents = chance.guid();
-  //     return new File([fileContents], fileName, { type: 'application/json' });
-  //   }, chance.d20());
+    const filesNotInLocalStorage = chance.n(() => {
+      const fileName = chance.guid();
+      const fileContents = chance.guid();
+      return new File([fileContents], fileName, { type: 'application/json' });
+    }, chance.d20());
 
-  //   filesInLocalStorage.forEach(localStorageService.setFileContents);
+    filesInLocalStorage.forEach(localStorageService.setFileContents);
 
-  //   // when
+    // when
     
     
-  //   // then
-  // });
+    // then
+  });
 
   it('observes changes from localStorage', () => {
 
