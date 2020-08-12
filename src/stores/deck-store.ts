@@ -1,4 +1,4 @@
-import { observable, action, ObservableMap } from "mobx";
+import { observable, action} from "mobx";
 
 export type Deck = {
   title: string;

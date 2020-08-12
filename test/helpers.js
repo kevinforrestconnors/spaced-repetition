@@ -41,8 +41,15 @@ function resetStores() {
   deckStore.actions.reset();
 }
 
+function resetLocalStorage() {
+  localStorage.setItem('spaced-repetition', JSON.stringify({
+    decks: {}
+  }));
+}
+
 beforeEach(() => {
   createWindow();
+  resetLocalStorage();
   resetStores();
 });
 createWindow();

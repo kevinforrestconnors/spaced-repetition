@@ -4,8 +4,47 @@ import * as localStorageService from '../../src/services/local-storage-service';
 
 describe('Local storage service', () => {
 
-  describe('Setting file contents', () => {
-    it('setFileContents sets localStorage with file name and contents', async () => {
+  describe('initial state', () => {
+    it('localStorage not set up for user', () => {
+      // given
+
+      // when
+
+      // then
+      expect(localStorage.getItem('spaced-repetition') === null).toEqual(false);
+      expect(JSON.parse(localStorage.getItem('spaced-repetition'))).toEqual({
+        decks: {}
+      });
+    });
+
+    it('localStorage already set up', async () => {
+      // given
+      const fileNames = chance.n(chance.guid, chance.d20());
+      const fileContents = chance.n(chance.guid, fileNames.length);
+
+      const decks = [];
+      const expectedLocalStorageDecks = {};
+
+      for (let i = 0; i < fileNames.length; i++) {
+        expectedLocalStorageDecks[fileNames[i]] = fileContents[i];
+        decks.push(new File([fileContents[i]], fileNames[i], { type: 'application/json' }));
+      }
+
+      await Promise.all(decks.map((deck) => (async () => {
+        await localStorageService.setFileContents(deck);
+      })()));
+
+      // when
+
+      // then
+      expect(JSON.parse(localStorage.getItem('spaced-repetition'))).toEqual({
+        decks: expectedLocalStorageDecks
+      });
+    });
+  });
+
+  describe('Setting file', () => {
+    it('setFileContents sets localStorage with file name and contents in json format', async () => {
       // given
       const fileName = chance.guid();
       const fileContents = chance.guid();
@@ -15,11 +54,11 @@ describe('Local storage service', () => {
       await localStorageService.setFileContents(file);
 
       // then
-      expect(localStorage.getItem(fileName)).toEqual(fileContents);
+      expect(JSON.parse(localStorage.getItem('spaced-repetition')).decks[fileName]).toEqual(fileContents);
     });
   });
 
-  describe('Getting file contents', () => {
+  describe('Getting file', () => {
     it('getFileContents just passes to localStorage.getItem', async () => {
       // given
       const fileName = chance.guid();
@@ -58,6 +97,10 @@ describe('Local storage service', () => {
       expect(retrievedFile.name).toEqual(fileName);
       expect(retrievedFileContents).toEqual(fileContents);
       expect(retrievedFile.type).toEqual('application/json');
+
+    });
+
+    it('getFileContent cannot find the file', async () => {
 
     });
   });

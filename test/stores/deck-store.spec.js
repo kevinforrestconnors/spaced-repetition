@@ -3,6 +3,7 @@ import expect from 'expect';
 import {chance} from '../helpers';
 import {deckStore} from '../../src/stores/deck-store';
 import {observable} from 'mobx';
+import * as localStorageService from '../../src/services/local-storage-service';
 
 describe('Deck store', () => {
 
@@ -94,6 +95,33 @@ describe('Deck store', () => {
     decksNotToDelete.forEach((deck) => {
       expect(deckStore.select.deck(deck.title)).toEqual(deck);
     });
+  });
+
+  // it('initializes with decks from localStorage', () => {
+  //   // given
+    
+  //   const filesInLocalStorage = chance.n(() => {
+  //     const fileName = chance.guid();
+  //     const fileContents = chance.guid();
+  //     return new File([fileContents], fileName, { type: 'application/json' });
+  //   }, chance.d20());
+    
+  //   const filesNotInLocalStorage = chance.n(() => {
+  //     const fileName = chance.guid();
+  //     const fileContents = chance.guid();
+  //     return new File([fileContents], fileName, { type: 'application/json' });
+  //   }, chance.d20());
+
+  //   filesInLocalStorage.forEach(localStorageService.setFileContents);
+
+  //   // when
+    
+    
+  //   // then
+  // });
+
+  it('observes changes from localStorage', () => {
+
   });
 
 });
